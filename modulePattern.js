@@ -1,9 +1,6 @@
 function Basket() {
-    // var itemName = [];
-    // var itemQuantity = [];
-
     var basket = {};
-    var basketTotal = 0;
+
 
     /**
      * Adds the item to the basket, saving it locally
@@ -14,37 +11,8 @@ function Basket() {
     function addToBasket( item, quantity ) {
         item.amount = quantity;
 
-        console.log(item);
-
-        // itemName.push(item.label);
-        // itemQuantity.push(quantity);
-        //
-        // console.log(itemName);
-        // console.log(itemQuantity);
-        // var name = item.label;
-
-        // basket[name] = quantity;
-        //
-        // console.log(basket);
-
-
-        // basket[name] = item;
-        //
-        // console.log(basket);
-
-            // console.log(item);
-        // var theObject = item;
-
-        // basket[theObject] = quantity;
-        // console.log(basket);
-
-        // basket[quantity] = theObject;
-
-        // console.log(basket);
-
         basket[item.label] = item;
 
-        console.log(basket);
     }
 
     /**
@@ -60,15 +28,11 @@ function Basket() {
      */
     function removeFromBasket( item, quantity ) {
 
-        // if (basket[item.label].amount === quantity) {
-        //     delete basket[item.label];
-        //     // return true;
-        // }
-
         if (basket[item.label].amount >= quantity && quantity > 0) {
 
             basket[item.label].amount -= quantity;
 
+            // console.log(basket);
 
             if (basket[item.label].amount === 0) {
                 delete basket[item.label];
@@ -82,30 +46,6 @@ function Basket() {
         }
 
 
-            // if (basket[item.label].amount > quantity) {
-        //     console.log('hello');
-            // basket[item.label].amount -= quantity;
-            // return basket[item.label].amount;
-        // }
-
-        // console.log(basket);
-
-
-
-        // if (item.label in basket) {
-        //     basket[item.label].amount -= quantity;
-        //
-        // }
-        //
-        // console.log(basket);
-        //
-        // if (basket[item.label].amount === 0) {
-        //     delete basket[item.label];
-        // }
-        //
-        // console.log(basket);
-
-
     }
 
     /**
@@ -114,9 +54,11 @@ function Basket() {
      * @returns {Number} the total
      */
     function calculateTotal() {
+        var basketTotal = 0;
+        var key;
+
         for (key in basket) {
-            var itemTotal = basket[key].cost * basket[key].amount;
-            basketTotal += itemTotal;
+            basketTotal += basket[key].cost * basket[key].amount;
         }
         return basketTotal;
 
@@ -129,19 +71,28 @@ function Basket() {
      * @returns {String}
      */
     function prettyPrintItem( item ) {
+
+        return item.label + ' (' + item.amount + '/£' + item.cost + ')' + ' total: £' + (item.amount * item.cost).toFixed(2);
+
     }
 
     /**
      * Pretty prints each item in the basket and the total at the end
      */
     function prettyPrintBasket() {
+        for (var item in basket) {
+            console.log(prettyPrintItem(basket[item]));
+        }
+
+        console.log('--');
+        console.log('Total: £' + calculateTotal().toFixed(2));
     }
 
     return {
         addToBasket: addToBasket,
         removeFromBasket: removeFromBasket,
         calculateTotal: calculateTotal,
-        prettyPrintBasket: prettyPrintBasket
+        prettyPrintBasket: prettyPrintBasket,
     }
 }
 
@@ -172,8 +123,8 @@ myBasket.prettyPrintBasket();
 // --
 // Total: £8
 console.log( '' );
-// myBasket.removeFromBasket( apple, 1 );
-// myBasket.removeFromBasket( cereal, 1 );
+myBasket.removeFromBasket( apple, 1 );
+myBasket.removeFromBasket( cereal, 1 );
 
 myBasket.prettyPrintBasket();
 // Apple (4/£0.45) total: £1.8
@@ -182,4 +133,4 @@ myBasket.prettyPrintBasket();
 // Total: £2.4
 
 
-myBasket.prettyPrintItem('apple');
+// myBasket.prettyPrintItem(banana);
