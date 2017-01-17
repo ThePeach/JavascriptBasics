@@ -1,4 +1,4 @@
-function Basket() {
+var randomBasket = (function Basket() {
     var basket = [];
 
     /**
@@ -120,18 +120,20 @@ function Basket() {
     return {
         addToBasket: addToBasket,
         removeFromBasket: removeFromBasket,
-        prettyPrintBasket: prettyPrintBasket,
+        prettyPrintBasket: prettyPrintBasket
     }
-}
+})();
 
-// @TODO: fix the output of the program
+
+function Product(label, cost) {
+    this.label = label;
+    this.cost = cost;
+}
 
 var apple = new Product('Apple', 0.45);
 var banana = new Product('Banana', 0.30);
 var cereal = new Product('Ceerios', 5.15);
 
-// @TODO: remove the following line.
-var randomBasket = Basket();
 
 randomBasket.addToBasket(apple, 1);
 randomBasket.addToBasket(cereal, 5);
@@ -142,3 +144,4 @@ randomBasket.prettyPrintBasket();
 randomBasket.removeFromBasket(cereal, 2);
 randomBasket.removeFromBasket(banana, 4);
 randomBasket.prettyPrintBasket();
+
