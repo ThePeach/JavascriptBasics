@@ -134,6 +134,9 @@ var apple = new Product('Apple', 0.45);
 var banana = new Product('Banana', 0.30);
 var cereal = new Product('Ceerios', 5.15);
 
+apple.printCost(); // Apple: £0.45
+banana.printCost(); // Banana: £0.30
+cereal.printCost(); // Apple: £5.15
 
 randomBasket.addToBasket(apple, 1);
 randomBasket.addToBasket(cereal, 5);
